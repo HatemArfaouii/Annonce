@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="demo-btns pull-left">
+                <li>
+                    <h1><i class="glyphicon glyphicon-edit"></i> Modifier Profil</h1>
+                </li>
+                &nbsp;&nbsp;
+                <li>
+                    <a href="{{ path('user_index') }}" class="btn btn-primary btn-circle btn-sm" title="Retour à la liste"><i class="fa fa-lg fa-mail-reply"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {{ include('user/_form.html.twig', {}) }}
+
+{% endblock %}

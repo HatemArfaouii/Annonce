@@ -1,0 +1,217 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Post annonce
+{% endblock %}
+
+{% block body %}
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-wrapper">
+                        <h2 class="product-title"><i class="fa fa-send"></i> Déposer annonce </h2>
+                        <ol class="breadcrumb">
+                            <li><a href="/">Home /</a></li>
+                            <li class="current">Publiez vos annonces
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_start(form,{attr: {class: 'smart-form login-form', id:'order-form' }}) }}
+    <div id="content" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
+                    <aside>
+                        <div class="sidebar-box">
+                            <div class="user">
+                                <figure>
+                                    {% if app.user.filename != '' %}
+                                        <a href="#"><img src="{{ asset('images/users/') }}{{ app.user.filename }}"
+                                                         alt="" id="pp"></a>
+                                        <div class="usercontent">
+                                            <h3>{{ app.user.fullname }}</h3>
+                                        </div>
+                                    {% else %}
+                                        <a href="#"><img src="{{ asset('img/avatars/male.png') }}" alt=""></a>
+                                    {% endif %}
+                                </figure>
+                            </div>
+
+                            <nav class="navdashboard">
+                                <ul>
+                                    <li>
+                                        <a href="dashboard.html">
+                                            <i class="fa fa-dashboard"></i>
+                                            <span>Tableau de bord</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('customer_settingprofile', {'id': app.user.id}) }}">
+                                            <i class="fa fa-cog"></i>
+                                            <span>Modifier profil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/front/customer/customerprofil">
+                                            <i class="fa fa-list"></i>
+                                            <span>Mes annonces</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/front/customer/posteannonce">
+                                            <i class="fa fa-plus-circle"></i>
+                                            <span>Ajoute annonce</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout">
+                                            <i class="fa fa-lock"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div class="row page-content">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="inner-box">
+                                <div class="dashboard-box">
+                                    <h2 class="dashbord-title">Ajouter détail</h2>
+                                </div>
+                                <div class="dashboard-wrapper">
+                                    <div class="form-group mb-3">
+                                        <label class="control-label"> Catégorie </label>
+                                        {{ form_row(form.subcategory ,{'attr':{'placeholder':'Catégorie','class':'form-control'} } ) }}
+                                        <div class="help-block with-errors"></div>
+
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="control-label"> Type d'annonce </label>
+                                        {{ form_row(form.type ,{'attr':{'placeholder':'Type annonce','class':'form-control'} } ) }}
+                                        <div class="help-block with-errors"></div>
+
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Prix</label>
+                                        {{ form_row(form.prix ,{'attr':{'placeholder':'Prix','class':'form-control'} } ) }}
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <style>
+                                        #annonce_imageFile {
+                                            display: block;
+                                        }
+                                    </style>
+
+                                    <label class="tg-fileuploadlabel" for="tg-photogallery">
+                                        {{ form_row(form.imageFile ,{'attr':{'placeholder':'choisir image','class':'form-control'} } ) }}
+                                        {{ form_row(form.imageFile2 ,{'attr':{'placeholder':'choisir image','class':'form-control'} } ) }}
+                                        {{ form_row(form.imageFile3 ,{'attr':{'placeholder':'choisir image','class':'form-control'} } ) }}
+                                        {{ form_row(form.imageFile4 ,{'attr':{'placeholder':'choisir image','class':'form-control'} } ) }}
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                            <div class="inner-box">
+                                <div class="tg-contactdetail">
+                                    <div class="dashboard-box">
+                                        <h2 class="dashbord-title">Détail annonce</h2>
+                                    </div>
+                                    <div class="dashboard-wrapper">
+                                        <div class="form-group mb-3">
+                                            <label class="control-label">Titre</label>
+                                            {{ form_row(form.libelle ,{'attr':{'placeholder':'Titre','class':'form-control'} } ) }}
+                                            <div class="help-block with-errors"></div>
+
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label class="control-label">Ville</label>
+                                            {{ form_row(form.ville ,{'attr':{'placeholder':'Ville','class':'form-control'} } ) }}
+                                            <div class="help-block with-errors"></div>
+
+                                        </div>
+                                         <div class="form-group mb-3">
+                                            <label class="control-label">Adresse [Rue] :</label>
+                                            {{ form_row(form.adresse ,{'attr':{'placeholder':'Adresse','class':'form-control'} } ) }}
+                                             <div class="help-block with-errors"></div>
+
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class="control-label"> Téléphone </label>
+                                            {{ form_row(form.phone ,{'attr':{'placeholder':'Téléphone','class':'form-control'} } ) }}
+                                            <div class="help-block with-errors"></div>
+
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label class="control-label">Description</label>
+                                            {{ form_row(form.description ,{'attr':{'placeholder':'Description','class':'form-control'} } ) }}
+                                            <div class="help-block with-errors"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12  text-center">
+            <button type="reset" class="btn btn-common disabled log-btn " onclick="this.form.reset();">RESET
+            </button>
+
+            <a class="btn btn-common log-btn" data-target="#modal_valid_annonce" data-toggle="modal"
+               style="color: #fff;">Déposer annonce</a>
+        </div>
+    </div>
+
+
+
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal_valid_annonce"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: whitesmoke;">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="fa fa-lg fa-check-circle" style="color:#89AD45"></i>
+                        Validation </h5>
+                    <button class="close " data-dismiss="modal" style="color: red;" type="button">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding" style="text-align: center;">
+                        <fieldset>
+                            <h5>
+                                Cliquer sur <b>valider</b> pour enregistrer cette annonce.
+                            </h5>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color: whitesmoke;">
+                    <div class="col-lg-12  text-center">
+                        <button type="reset" class="btn btn-common disabled log-btn" data-dismiss="modal">Annuler
+                        </button>
+
+                        <button class="btn btn-common log-btn">valider</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{ form_end(form) }}
+
+{% endblock %}

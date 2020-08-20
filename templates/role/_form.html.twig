@@ -1,0 +1,34 @@
+<div class="col-12 ">
+    <div class="well no-padding">
+        {{ form_start(form,{attr: {class: 'smart-form client-form', id:'order-form' }}) }}
+        <fieldset>
+            <section class="col col-4"> Role Name
+                <label class="input">
+                    {{ form_row(form.rolename ,{'attr':{'placeholder':'Role name'} } ) }}
+                </label>
+            </section>
+            <section class="col col-4">Role code
+                <label class="select"> <i class=""></i>
+                    {{ form_row(form.rolecode ,{'attr':{'placeholder':'Role code'} }) }}
+                    <b class="tooltip tooltip-bottom-right">Entrer votre username</b>
+                </label>
+            </section>
+        </fieldset>
+        <footer>
+            <a class="btn bg-color-green txt-color-white" href='#' id='saverole'>
+                <i class="fa fa-save"></i>
+                SAUVEGARDER
+            </a>
+            <button class="btn bg-color-red txt-color-white" onclick="this.form.reset();" type="reset">
+                <i class="fa fa-remove"></i>
+                RESET
+            </button>
+        </footer>
+        <div class="message">
+            <i class="fa fa-check"></i>
+            <p>Thank you for your registration!
+            </p>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>

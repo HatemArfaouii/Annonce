@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>
+        {% block title %}Gestion d'annuaire {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/fonts/line-icons.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/slicknav.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/nivo-lightbox.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/avatar.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/owl.carousel.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/color/cyan.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/responsive.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/search_region.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/account/customer.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/account/customer.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('fronttheme/css/jquery-confirm.min.css') }}"/>
+    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css"
+          rel="stylesheet">
+    <style>
+        #bb {
+            width: 60px;
+            height: 60px;
+        }
+
+        #pp {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+{% block header %}
+    <header id="header-wrap">
+    <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-target="#main-navbar" data-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="fa fa-menu"></span>
+                    <span class="fa fa-menu"></span>
+                    <span class="fa fa-menu"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="main-navbar">
+                <a class="navbar-brand" href="#" style="color:white">
+                    <i>
+                        <img src="{{ asset('fronttheme/img/logo.png') }}"/>
+                    </i>
+                </a>
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/front">
+                            <i class="fa fa-home"></i>&nbsp; Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-fw fa-bullhorn"></i>&nbsp; Offres
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/front/contact">
+                            <i class="fa fa-envelope"></i>&nbsp;Contact
+                        </a>
+                    </li>
+                </ul>
+                <ul class="sign-in">
+                    {% if app.user == '' %}
+                        <a class="tg-btn" href="/front/logincustomer">
+                            <i class="fa fa-lock"></i>&nbsp;Connexion
+                        </a>
+                        <li class="nav-item">
+                            <a class="tg-btn" href="/front/profil">
+                                <i class="fa fa-user-plus"></i>&nbsp;Inscription
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="tg-btn" href="/front/logincustomer">
+                                <i class="fa fa-plus"></i>&nbsp;Deposer annonce
+                            </a>
+                        </li>
+                    {% else %}
+                        <ul class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% if app.user.filename != '' %}
+                                    <img src="{{ asset('images/users/') }}{{ app.user.filename }}" class="rounded-circle"
+                                         id="bb">
+                                {% else %}
+                                    <img src="{{ asset('fronttheme/img/male.png') }}" alt="me" class="rounded-circle"  id="bb"/>
+                                {% endif %}
+
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#"><i class="fa fa-user"></i>{{ app.user.fullname }}</a>
+                                <a class="dropdown-item" href="#"></a>
+                                <a class="dropdown-item" href="/front/customer/customerprofil"><i class="fa fa-list"></i>Mes Annonces</a>
+                                <a class="dropdown-item" href="/front/customer/posteannonce"><i class="fa fa-plus"></i>Deposer annonce</a>
+                                <a class="dropdown-item" href="/front/profil"><i class="fa fa-user-plus"></i>Créer compte</a>
+                                <a class="dropdown-item"
+                                   href="{{ path('customer_settingprofile', {'id': app.user.id}) }}"><i class="fa fa-pencil"></i>Modifier profil</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/front/logouts"><i class="fa fa-sign-out"></i> Logout</a>
+                            </div>
+                        </ul>
+
+
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+
+        <ul class="mobile-menu">
+            <li>
+                <a href="/front"><i class="fa fa-home"></i>&nbsp;Accueil</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-envelope"></i>&nbsp;Contact</a>
+            </li>
+            <li>
+                <a href="/front/contact"><i class="fa fa-user-plus"></i>&nbsp;Compte</a>
+                <ul class="dropdown">
+                    {% if app.user == '' %}
+                        <a class="tg-btn" href="/front/logincustomer">
+                            <i class="fa fa-lock"></i>&nbsp;Connexion
+                        </a>
+                        <a class="tg-btn" href="/front/profil">
+                            <i class="fa fa-user-plus"></i>&nbsp;Inscription
+                        </a>
+                    {% else %}
+                        <a class="" href="/front/logout">
+                            <i class="fa fa-sign-out"></i>&nbsp;Déconnexion
+                        </a>
+                    {% endif %}
+                </ul>
+            </li>
+            <li>
+                <a href="/front/customer/posteannonce"><i class="fa fa-plus"></i>&nbsp;Deposer annonce</a>
+            </li>
+        </ul>
+
+    </nav>
+    </header>{% endblock %} {% block body %}{% endblock %}  {% block footer %}
+    <footer>
+        <section class="footer-Content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+                        <div class="widget">
+                            <h3 class="block-title">Nous Suivre</h3>
+                            <div class="wrapper">
+                                <ul>
+                                    <a href="https://www.facebook.com/BUY-SELL-110739030334702/">
+                                        <li class="facebook">
+                                            <i aria-hidden="true" class="fa fa-facebook fa-2x"></i>
+                                        </li>
+                                    </a>
+                                    <li class="twitter">
+                                        <i aria-hidden="true" class="fa fa-twitter fa-2x"></i>
+                                    </li>
+                                    <li class="instagram">
+                                        <i aria-hidden="true" class="fa fa-instagram fa-2x"></i>
+                                    </li>
+                                    <li class="google">
+                                        <i aria-hidden="true" class="fa fa-google fa-2x"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+                        <div class="widget">
+                            <h3 class="block-title">Newsletter</h3>
+                            <form class="validate" id="subscribe-form" method="post" name="subscribe-form">
+                                <div class="form-group is-empty">
+                                    <input class="form-control" id="EMAIL" name="Email" placeholder="Adresse e-mail"
+                                           required="" type="email" value="">
+                                    <button class="btn btn-common sub-btn" id="subscribes" name="subscribe"
+                                            type="submit">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+                        <h3 class="block-title">copyright</h3>
+                        <div id="copyright">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <center>
+                                            <div class="site-info float-center">
+                                                <p>
+                                                    2019 BUY & SELL © droits réservés - Mentions légales
+                                                </p>
+                                            </div>
+
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </footer>
+{% endblock %}
+<a class="back-to-top" href="#">
+    <i class="fa fa-angle-up"></i>
+</a>
+<script src="{{ asset('fronttheme/js/jquery-min.js') }}"></script>
+<script src="{{ asset('fronttheme/js/popper.min.js') }}"></script>
+<script src="{{ asset('fronttheme/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/manage/manage-annonce.js') }}"></script>
+<script src="{{ asset('fronttheme/js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('fronttheme/js/waypoints.min.js') }}"></script>
+<script src="{{ asset('fronttheme/js/microphone.js') }}"></script>
+<script src="{{ asset('fronttheme/js/wow.js') }}"></script>
+<script src="{{ asset('fronttheme/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('fronttheme/js/nivo-lightbox.js') }}"></script>
+<script src="{{ asset('fronttheme/js/jquery.slicknav.js') }}"></script>
+<script src="{{ asset('fronttheme/js/main.js') }}"></script>
+<script src="{{ asset('fronttheme/js/form-validator.min.js') }}"></script>
+<script src="{{ asset('fronttheme/js/contact-form-script.min.js') }}"></script>
+<script src="{{ asset('fronttheme/js/summernote.js') }}"></script>
+<script src="{{ asset('fronttheme/js/account/customer.js') }}"></script>
+<script src="{{ asset('fronttheme/js/account/file.js') }}"></script>
+<script src="{{ asset('js/jquery-confirm.min.js') }}"></script>
+
+
+</body>
+</html>

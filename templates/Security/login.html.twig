@@ -1,0 +1,48 @@
+{% extends 'base_login.html.twig' %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey }}
+        </div>
+    {% endif %}
+    <form action="{{ path('security_login') }}" method="post" id="login-form" class="smart-form client-form">
+        <header class="text-align-center">
+            Bienvenu chez G-A
+        </header>
+        <fieldset>
+            <section>
+                <div class="form-group">
+                    <label for=Invalid credentials."username">Username</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}"
+                               class="form-control"/>
+                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter
+                            your username</b>
+                    </label>
+                </div>
+            </section>
+            <section>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <label class="input"> <i class="icon-append fa fa-lock"></i>
+                        <input type="password" id="password" name="_password" class="form-control"/>
+                        <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your
+                            password</b>
+                    </label>
+                </div>
+            </section>
+            <section>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+            </section>
+
+        </fieldset>
+        <footer>
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> Connexion
+            </button>
+        </footer>
+    </form>
+
+{% endblock %}
+

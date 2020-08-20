@@ -1,0 +1,206 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Customer Profil
+{% endblock %}
+
+{% block body %}
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-wrapper">
+                        <h2 class="product-title"><i class="fa fa-list"></i> Mes annonces</h2>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home /</a></li>
+                            <li class="current"> Mes annonces</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
+                    <aside>
+                        <div class="sidebar-box">
+                            <div class="user">
+                                <figure>
+                                    {% if app.user.filename != '' %}
+                                        <a href="#"><img src="{{ asset('images/users/') }}{{ app.user.filename }}"
+                                                         alt="" id="pp"></a>
+                                        <div class="usercontent">
+                                            <h3>{{ app.user.fullname }}</h3>
+                                        </div>
+                                    {% else %}
+                                        <a href="#"><img src="{{ asset('img/avatars/male.png') }}" alt=""></a>
+                                    {% endif %}
+                                </figure>
+
+                            </div>
+                            <nav class="navdashboard">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-dashboard"></i>
+                                            <span>Tableau de bord</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('customer_settingprofile', {'id': app.user.id}) }}">
+                                            <i class="fa fa-cog"></i>
+                                            <span>Modifier profil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/front/customer/customerprofil">
+                                            <i class="fa fa-list"></i>
+                                            <span>Mes annonces</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/front/customer/posteannonce">
+                                            <i class="fa fa-plus-circle"></i>
+                                            <span>Ajoute annonce</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout">
+                                            <i class="fa fa-lock"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div class="page-content">
+                        <div class="inner-box">
+                            <div class="dashboard-box">
+                                <h2 class="dashbord-title"><i class="fa fa-list"></i> Mes annonces</h2>
+                            </div>
+                            <div class="dashboard-wrapper">
+                                <nav class="nav-table">
+                                    <ul>
+                                        <li class="active"><a href="#"><i class="fa fa-reorder"></i> Totale ({{ all_annonce }})</a></li>
+                                        <li><a href="#"><i class="fa fa-times-circle"></i> En attente ({{ attente }})</a></li>
+                                        <li><a href="#"><i class="fa fa-check"></i> Active ({{ active }})</a></li>
+                                        <li><a href="#"><i class="fa fa-remove"></i> Refusé ({{ refuse }})</a></li>
+                                    </ul>
+                                </nav>
+                                <table class="table table-responsive dashboardtable tablemyads">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="checkedall">
+                                                <label class="custom-control-label" for="checkedall"></label>
+                                            </div>
+                                        </th>
+                                        <th>Photo</th>
+                                        <th>Title</th>
+                                        <th>Categorie</th>
+                                        <th>Status</th>
+                                        <th>Prix</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for my_annonce in my_annonces %}
+                                        <tr data-category="active">
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="adone">
+                                                    <label class="custom-control-label" for="adone"></label>
+                                                </div>
+                                            </td>
+                                            <td class="photo"><img class="img-fluid"
+                                                                   src="{{ asset('images/users/') }}{{ my_annonce.filename }}"
+                                                                   alt=""></td>
+                                            <td data-title="Title">
+                                                <h3>{{ my_annonce.libelle }}</h3>
+                                            </td>
+                                            <td data-title="Category">
+                                                <span class="adcategories">{{ my_annonce.subcategory.category.libelle }}</span>
+                                            </td>
+
+                                            <td data-title="Ad Status">
+                                                {% if (my_annonce.verifannonce == '1' ) %}
+                                                <span class="adstatus adstatusactive">Active</span>
+                                                {% elseif (my_annonce.verifannonce == '2' ) %}
+                                                    <span class="adstatus adstatusdeleted">Refusé</span>
+                                                {% elseif (my_annonce.verifannonce == '0' ) %}
+                                                    <span class="adstatus adstatusexpired">Attende</span>
+                                                {% endif %}
+                                            </td>
+
+                                            <td data-title="Price">
+                                                <h3>{{ my_annonce.prix|number_format }}Dt</h3>
+                                            </td>
+                                            <td data-title="Action">
+                                                <div class="btns-actions">
+                                                    <a class="btn-action btn-view" href="{{ path('customer_repmessage', {'id': my_annonce.id}) }}" title="Repondre au message">
+                                                        <i class="fa fa-envelope-o" id="{{ my_annonce.id}}" ></i>
+                                                    </a>
+                                                    <a class="btn-action btn-edit" href="{{ path('customer_editannonce', {'id': my_annonce.id}) }}">
+                                                        <i class="fa fa-pencil" id="{{ my_annonce.id}}" ></i>
+                                                    </a>
+                                                    <a class="btn-action btn-delete" href="#">
+                                                        <i class="fa fa-trash delete_annonce_front" data-id="{{ my_annonce.id}}" data-target="#modal_delete_annonce" data-toggle="modal"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal_delete_annonce"
+                                     role="dialog" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: whitesmoke;">
+                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                    <i class="fa fa-lg fa-trash-o" style="color:red"></i>
+                                                    Supprission
+                                                </h5>
+                                                <button class="close " data-dismiss="modal" style="color: red;" type="button">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="widget-body no-padding" style="text-align: center;">
+                                                    <fieldset>
+                                                        <h5>
+                                                            Cliquer sur #valider pour supprimer cette annonce.
+                                                        </h5>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer" style="background-color: whitesmoke;">
+                                                <div class="col-lg-12  text-center">
+                                                    <button type="reset" class="btn btn-common disabled log-btn"  data-dismiss="modal">Annuler</button>
+
+                                                    <a class="btn btn-common log-btn valid_delete_annonce">Valider</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

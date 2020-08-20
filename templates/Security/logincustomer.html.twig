@@ -1,0 +1,89 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Customer login
+{% endblock %}
+
+{% block body %}
+    <div class="page-header" style="background: url(fronttheme/img/banner1.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-wrapper" style="text-align: -webkit-left;">
+                        <h2 class="product-title" style="text-align: -webkit-left;"> <i class="fa fa-lock"></i>Connexion </h2>
+                        <ol class="breadcrumb">
+                            <li><a href="/customer">Home /</a></li>
+                            <li class="current">Login</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="login section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-12 col-xs-12">
+                    <div class="login-form login-area">
+                        <h3>
+                            <i class="fa fa-lock"> </i> Se Connecter
+                        </h3>
+                        <form action="{{ path('security_logincustomer') }}" method="post" id="login-form"
+                              class="smart-form client-form">
+                            <div class="modal-body">
+                                {% if error %}
+                                    <div class="alert alert-danger">
+                                        {{ error.messageKey }}
+                                    </div>
+                                {% endif %}
+                                <fieldset>
+                                    <section>
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" id="username" name="_username"
+                                                   value="{{ last_username }}"
+                                                   class="form-control"/>
+                                            <b class="tooltip tooltip-top-right"><i
+                                                        class="fa fa-user txt-color-teal"></i> Please enter
+                                                your username</b>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="form-group">
+                                            <label for="password">Mot de passe</label>
+                                            <input type="password" id="password" name="_password" class="form-control"/>
+                                            <b class="tooltip tooltip-top-right"><i
+                                                        class="fa fa-lock txt-color-teal"></i> Enter your
+                                                password</b>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}"/>
+                                    </section>
+                                    <div class="note">
+                                        <a href="#">Forgot password?</a>
+                                    </div>
+                                    <section>
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="remember" checked="">
+                                            <i></i>Stay signed in</label>
+                                    </section>
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer" style="background-color: whitesmoke;">
+                                <button class="btn btn-common log-btn btn-danger" data-dismiss="modal" type="button">
+                                    <i class="fa fa-lg fa-close"></i>
+                                    Annuller
+                                </button>
+                                <input type="hidden" name="_target_path" value="{{ path('customer_customerprofil') }}"/>
+                                <button type="submit"name="login"  class="btn btn-common log-btn btn-primary">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i> Connexion
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

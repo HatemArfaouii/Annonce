@@ -1,0 +1,282 @@
+#dragdrop .well {
+    padding: 5px;
+    border: 0;
+    background: #e0e0e0;
+}
+
+#dragdrop .well .header {
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+#dragdrop .well .subheader {
+    color: #969696;
+    font-size: 12px;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 2px;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-topright: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+#dragdrop .well .subheader .buttonsml {
+    background: #5bb95b;
+    padding: 3px;
+    color: #fff;
+    font-size: 11px;
+    line-height: 9px;
+}
+
+.draglist-shift {
+    margin-left: -3% !important;
+    width: 53% !important;
+}
+
+.sortable-list {
+    /*background-color: #fff;*/
+    list-style: none;
+    margin-bottom: 10px;
+    min-height: 30px;
+    padding: 5px;
+    background-color: white;
+}
+
+.sortable-list:last-child {
+    margin-bottom: 0;
+}
+
+.placeholder {
+    background-color: #D9EDF7;
+    border: 1px dashed #666;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.dragbleList {
+    max-height: 400px;
+    overflow: auto;
+}
+
+.sortable-item {
+    background: #f1f1f1 url(dragListicon.png) 10px 10px no-repeat;
+    cursor: move;
+    display: block;
+    margin-bottom: 2px;
+    padding: 24px 24px 24px 24px;
+    color: #5a5a5a;
+    font-size: 12px;
+}
+
+.progress {
+    margin: 10px;
+    width: 700px;
+}
+
+
+/* Style the form */
+
+#validatetest {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.img-prod {
+    width: 270px !important;
+    height: 200px !important;
+}
+
+
+/* Mark input boxes that gets an error on validation: */
+
+input.invalid {
+    background-color: #ffdddd;
+}
+
+
+/* Hide all steps by default: */
+
+.tab {
+    display: none;
+}
+
+
+/* Make circles that indicate the steps of the form: */
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+
+/* Mark the active step: */
+
+.step.active {
+    opacity: 1;
+}
+
+
+/* Mark the steps that are finished and valid: */
+
+.step.finish {
+    background-color: #4CAF50;
+}
+
+.todo>li>p {
+    margin-left: 27px;
+}
+
+.litodo {
+    border-left: 3px solid #d9534f;
+    border-radius: 3px;
+    margin: 0 0 10px 0;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.liprogress {
+    border-left: 3px solid #f0ad4e;
+    border-radius: 3px;
+    margin: 0 0 10px 0;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.lidone {
+    border-left: 3px solid #3c763d;
+    border-radius: 3px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.12);
+}
+
+
+/* upload image*/
+
+body {
+    background-color: #efefef;
+}
+
+.profile-pic {
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+}
+
+.file-upload {
+    display: none;
+}
+
+.circle {
+    border-radius: 1000px !important;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    position: center;
+    top: 72px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.p-image {
+    position: center;
+    top: 167px;
+    right: 30px;
+    color: #3276b1;
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.p-image:hover {
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.upload-button {
+    font-size: 1.2em;
+}
+
+.upload-button:hover {
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    color: #999;
+}
+
+.profile-img-container {
+    margin-top: 15px;
+    /*position: relative;*/
+    display: inline-block;
+    /* added */
+    overflow: hidden;
+    /* added */
+}
+
+.profile-img-container img {
+    width: 200px;
+}
+
+
+/* remove if using in grid system */
+
+.profile-img-container img:hover {
+    opacity: 0.5
+}
+
+.profile-img-container:hover a {
+    opacity: 1;
+    /* added */
+    top: 0;
+    /* added */
+    z-index: 500;
+}
+
+.profile-img-container:hover a span {
+    color: #0e70ca;
+    top: 95%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+
+/* added */
+
+.profile-img-container a {
+    display: block;
+    position: absolute;
+    top: -100%;
+    opacity: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    color: inherit;
+}
+
+#user_imageFile {
+    display: none;
+}
+
+#annonce_imageFile {
+    display: none;
+}
+
+.status_annonce:hover {
+    -webkit-transform: scale(1.25);
+    /* Safari and Chrome */
+    -moz-transform: scale(1.25);
+    /* Firefox */
+    -ms-transform: scale(1.25);
+    /* IE 9 */
+    -o-transform: scale(1.25);
+    /* Opera */
+    transform: scale(1.25);
+}

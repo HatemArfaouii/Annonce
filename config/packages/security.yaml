@@ -1,0 +1,57 @@
+security:
+    encoders:
+        App\Entity\User: bcrypt
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_ADMIN: ROLE_ADMIN
+
+    providers:
+        database_users:
+            entity: { class: App\Entity\User, property: username }
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        customer:
+            # les urls auxquels s'appliquent ce firewall, dans ce cas, ce sont toutes les urls
+            pattern: ^/front
+            # La connexion n'est pas requise sur toutes les pages
+            # par exemple la page d'accueil
+            anonymous: ~
+            form_login:
+                use_referer: true
+                # Le nom de la route de la page de connexion
+                login_path: security_logincustomer
+                check_path: security_logincustomer
+                always_use_default_target_path: true
+                # Securisation des formulaires
+                csrf_token_generator: security.csrf.token_manager
+                # La page par defaut apres une connexion reussie
+                default_target_path: customer_customerprofil
+            logout:
+                path: security_logouts
+                target: /front/logincustomer
+
+        admin:
+            pattern: ^/
+            anonymous: ~
+            form_login:
+                login_path: security_login
+                check_path: security_login
+                always_use_default_target_path: true
+                    # Securisation des formulaires
+                csrf_token_generator: security.csrf.token_manager
+                    # La page par defaut apres une connexion reussie
+                default_target_path: /admin
+            logout:
+                path: security_logout
+                target: /login
+
+    access_control:
+        # Les regles de securité
+        # Là dans ce cas seul les utilisateurs ayant le rôle ROLE_ADMIN
+        # peuvent acceder à toutes les pages commençant par /admin
+        - { path: ^/, role: [ROLE_USER, IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: ^/front, role: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }

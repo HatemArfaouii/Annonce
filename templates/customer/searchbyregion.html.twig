@@ -1,0 +1,95 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Résultat search
+{% endblock %}
+
+{% block body %}
+
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-wrapper">
+                    <h2 class="product-title"><i class="fa fa-search-minus"></i> Résultats de recherche ({{ count_annonce_by_region }}) </h2>
+                    <ol class="breadcrumb">
+                        <li><a href="/front">Home /</a></li>
+                        <li class="current">rechercher
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="main-container section-padding">
+        <div class="container">
+            <div class="row">
+                {% for list_annonce_by_region in list_annonce_by_regions %}
+                <div class="col-lg-12 col-md-12 col-xs-12 page-content">
+                    <div class="adds-wrapper">
+                        <div class="tab-content">
+                            <div id="list-view" class="tab-pane fade active show">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="featured-box">
+                                            <figure>
+                                                <div class="icon">
+                                                    <i class="fa fa-heart"></i>
+                                                </div>
+                                                <a href="#"><img class="img-fluid" src="../fronttheme/img/banner1.jpg" alt=""></a>
+                                            </figure>
+                                            <div class="feature-content">
+                                                <div class="product">
+                                                    <a href="#"><i class="lni-folder"></i> Apple</a>
+                                                </div>
+                                                <h4><a href="#">Apple Macbook Pro 13 Inch</a></h4>
+                                                <span>Last Updated: 4 hours ago</span>
+                                                <ul class="address">
+                                                    <li>
+                                                        <a href="#"><i class="lni-map-marker"></i>Louis, Missouri, US</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="lni-alarm-clock"></i> May 18, 2018</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="lni-user"></i> Will Ernest</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="lni-package"></i> Brand New</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="listing-bottom">
+                                                    <h3 class="price float-left">$450.00</h3>
+                                                    <a href="account-myads.html" class="btn-verified float-right"><i class="fa fa-eye"></i> Voir détaille</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="pagination-bar">
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

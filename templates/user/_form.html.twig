@@ -1,0 +1,104 @@
+<div class="col-12 ">
+    <div class="well no-padding">
+
+        {{ form_start(form,{attr: {class: 'smart-form client-form', id:'order-form' }}) }}
+
+
+        <fieldset>
+
+
+            <div class=" col-sm-2 text-align-center">
+                <div class="circle text-align-center profile-img-container">
+                    <!-- User Profile Image -->
+                    {% if user.filename != '' %}
+                        <img class="profile-pic" src="{{ asset('images/users/') }}{{ user.filename }}"
+                             style=" width: 100%;height: 100%;" class="img-thumbnail img-circle img-responsive"/>
+
+                    {% else %}
+                        <img class="profile-pic" src="{{ asset('img/avatars/male.png') }}"
+                             style=" width: 100%;height: 100%;" class="img-thumbnail img-circle img-responsive"/>
+                    {% endif %}
+                    <a href="#"><span class="fa fa-camera fa-2x upload-button" title="Image de profile"></span></a>
+                </div>
+                <div class="p-image">
+                    {{ form_row(form.imageFile ,{'attr':{'class':'file-upload','accept':'image/*'} } ) }}
+                </div>
+            </div>
+
+
+            <section class="col col-5">
+                <label class="input"> <i class="icon-append fa fa-user"></i>
+                    {{ form_row(form.fullName ,{'attr':{'placeholder':'Nom & prénom'} } ) }}
+                </label>
+            </section>
+            <section class="col col-5">
+                <label class="input"> <i class="icon-append fa fa-user"></i>
+                    {{ form_row(form.username ,{'attr':{'placeholder':'Username'} }) }}
+                    <b class="tooltip tooltip-bottom-right">Entrer votre username</b> </label>
+            </section>
+
+            <section class="col col-5">
+                <label class="input"> <i class="icon-append fa fa-envelope"></i>
+                    {{ form_row(form.email,{'attr':{'placeholder':'email'} }) }}
+                    <b class="tooltip tooltip-bottom-right">Entrer votre mail</b> </label>
+            </section>
+
+            <section class="col col-5">
+                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                    {{ form_row(form.password.first, {'attr':{'placeholder':"Password"} }) }}
+                    <b class="tooltip tooltip-bottom-right">Entrer votre passord</b> </label>
+            </section>
+
+            <section class="col col-5">
+                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                    {{ form_row(form.password.second, {'attr':{'placeholder':"Repeat Password"} }) }}
+                    <b class="tooltip tooltip-bottom-right">Repeat Password</b> </label>
+            </section>
+            <section class="col col-5">
+                <label class="input">
+                    <i class="icon-append fa fa-map-marker"></i>
+                    {{ form_row(form.addresse ,{'attr':{'placeholder':'Adresse'} } ) }}
+                </label>
+            </section>
+            <section class="col col-5">
+                <label class="input">
+                    <i class="icon-append fa fa-mobile-phone"></i>
+                    {{ form_row(form.telmobile ,{'attr':{'placeholder':'Téléphone mobile'} } ) }}
+                </label>
+            </section>
+            <section class="col col-5">
+                <label class="input">
+                    <i class="icon-append fa fa-phone"></i>
+                    {{ form_row(form.telfixe ,{'attr':{'placeholder':'Téléphone fixe'} } ) }}
+                </label>
+            </section>
+
+            <section class="col col-5">
+                <label class="input">
+                    <i class="icon-append fa fa-map-marker"></i>
+                    {{ form_row(form.codepost ,{'attr':{'placeholder':'Code postale'} } ) }}
+                </label>
+            </section>
+        </fieldset>
+        <footer>
+            <a href='#' id='saveuser' class="btn bg-color-green txt-color-white">
+                <i class="fa fa-save"></i> SAUVEGARDER
+            </a>
+            <button type="reset" class="btn bg-color-red txt-color-white" onclick="this.form.reset();">
+                <i class="fa fa-remove"></i> RESET
+            </button>
+        </footer>
+        <div class="message">
+            <i class="fa fa-check"></i>
+            <p>Thank you for your registration! </p>
+        </div>
+
+        {{ form_end(form) }}
+        <!--</form> -->
+
+    </div>
+
+</div>
+
+
+{{ form_end(form) }}

@@ -1,0 +1,14 @@
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    spool: { type: 'memory' }
+    transport: 'sendmail'
+    command: '/user/sbin/sendmail -oi -t'
+
+    # transport: gmail
+    # username: 'a.arfaouihatem@gmail.com'
+    # host: smtp.gmail.com
+    # password: 'azerty1993+-/'
+    # port: 465
+    # encryption: ssl
+    # auth_mode: login
+    # spool: { type: 'memory' }

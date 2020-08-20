@@ -1,0 +1,62 @@
+{# templates/register.html.twig #}
+{% extends 'base_front.html.twig' %}
+
+{% block body %}
+
+    <div class="col-12 ">
+        <div class="well no-padding">
+
+            <!--	<form action="php/demo-register.php" id="smart-form-register" class="smart-form client-form"> -->
+            {{ form_start(form,{attr: {class: 'smart-form client-form', id:'smart-form-register' }}) }}
+            <header>
+                <i class="glyphicon glyphicon-edit"></i> Inscription
+            </header>
+
+            <fieldset>
+                <section class="col col-4">
+                    <label class="input"> <i class="icon-append fa fa-user"></i>	
+                        {{ form_row(form.fullName ,{'attr':{'placeholder':'Nom & prénom'} } ) }}
+                    </label>	
+                </section>
+                <section class="col col-4">
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                        {{ form_row(form.username ,{'attr':{'placeholder':'Username'} }) }}
+                        <b class="tooltip tooltip-bottom-right">Entrer votre username</b> </label>
+                </section>
+
+                <section class="col col-4">
+                    <label class="input"> <i class="icon-append fa fa-envelope"></i>
+                        {{ form_row(form.email,{'attr':{'placeholder':'email'} }) }}
+                        <b class="tooltip tooltip-bottom-right">Entrer votre mail</b> </label>
+                </section>
+
+                <section class="col col-4">
+                    <label class="input"> <i class="icon-append fa fa-lock"></i>
+                        {{ form_row(form.password.first, {'attr':{'placeholder':"Password"} }) }}
+                        <b class="tooltip tooltip-bottom-right">Entrer votre passord</b> </label>
+                </section>
+
+                <section class="col col-4">
+                    <label class="input"> <i class="icon-append fa fa-lock"></i>
+                        {{ form_row(form.password.second, {'attr':{'placeholder':"Repeat Password"} }) }}
+                        <b class="tooltip tooltip-bottom-right">Repeat Password</b> </label>
+                </section>
+
+            </fieldset>
+            <footer>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Sauvegarder</button>
+            </footer>
+
+            <div class="message">
+                <i class="fa fa-check"></i>
+                <p>Thank you for your registration! </p>
+            </div>
+
+            {{ form_end(form) }}
+            <!--</form> -->
+
+        </div>
+
+    </div>
+
+{% endblock %}

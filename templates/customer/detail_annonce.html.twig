@@ -1,0 +1,266 @@
+{% extends 'base_front.html.twig' %} {% block title %}Details {% endblock %} {% block body %}
+    {% for detail in details %}
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb-wrapper">
+                            <h2 class="product-title"><i class="fa fa-align-left"></i>&nbsp;&nbsp;{{ detail.libelle }}
+                            </h2>
+                            <ol class="breadcrumb">
+                                <li><a href="/front">Home /</a></li>
+                                <li class="current">Details</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-padding">
+        <div class="container">
+        <div class="product-info row">
+            <div class="col-lg-8 col-md-12 col-xs-12">
+                <div class="details-box ads-details-wrapper cc">
+                    <div id="owl-demo" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="product-img">
+                                <img class="img-fluid" src="{{ asset('images/users/') }}{{ detail.filename }}" alt="">
+                            </div>
+                            <span class="price">{{ detail.prix |number_format }} Dt</span>
+                        </div>
+                        <div class="item">
+                            <div class="product-img">
+                                <img class="img-fluid" src="{{ asset('images/users/') }}{{ detail.filename2 }}" alt="">
+                            </div>
+                            <span class="price">{{ detail.prix |number_format }} Dt</span>
+                        </div>
+                        <div class="item">
+                            <div class="product-img">
+                                <img class="img-fluid" src="{{ asset('images/users/') }}{{ detail.filename3 }}" alt="">
+                            </div>
+                            <span class="price">{{ detail.prix |number_format }} Dt</span>
+                        </div>
+                        <div class="item">
+                            <div class="product-img">
+                                <img class="img-fluid" src="{{ asset('images/users/') }}{{ detail.filename4 }}" alt="">
+                            </div>
+                            <span class="price">{{ detail.prix |number_format }} Dt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-6 col-xs-12">
+
+                <aside class="details-sidebar">
+                    <div class="widget">
+                        <h4 class="widget-title">Deposé par :</h4>
+                        <div class="agent-inner">
+                            <div class="agent-title">
+                                <div class="agent-photo">
+                                    <a href="#"><img src="{{ asset('images/users/') }}{{ detail.userid.filename }}"
+                                                     alt="" id="bb"></a>
+                                </div>
+                                <div class="agent-details">
+                                    <h3><a href="#">{{ detail.userid.fullname }}</a></h3>
+                                    <span><i class="fa fa-mobile-phone"></i>(+216) {{ detail.userid.telmobile }}</span><br>
+                                    <span><i class="fa fa-enveloppe"></i> {{ detail.userid.email }}</span>
+                                </div>
+                            </div>
+                            {% if app.user != '' %}
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" class="get_message" data-parent="#accordion"
+                                               href="#collapseSix">
+                                                <i class="fa fa-send"></i> Envoyer Message
+                                            </a>
+                                            <input type="hidden" class="annonceid" value="{{ detail.id }}">
+                                        </h4>
+                                    </div>
+                                    <div id="collapseSix" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul>
+                                                {#                                                <li class="message message-reply all_message">#}
+                                                {#                                                    <img src="{{ asset('images/users/') }}{{ detail.userid.filename }}"#}
+                                                {#                                                         class="online" alt="" id="bb">#}
+                                                {#                                                    <span class="message-text">#}
+                                                {#                                                        <a href="javascript:void(0);" class="username">#}
+                                                {#                                                            <font style="vertical-align: inherit;">#}
+                                                {#                                                                <font style="vertical-align: inherit;">{{ detail.userid.fullname }}</font></font>#}
+                                                {#                                                        </a>#}
+                                                {#                                                        </font>#}
+                                                {#                                                        <font style="vertical-align: inherit;"> </font>#}
+                                                {#                                                    </span>#}
+                                                {#                                                </li>#}
+                                                <li>
+                                                    <div class="input-group wall-comment-reply">
+                                                        <input type="hidden" class="annonceid"
+                                                               value="{{ detail.id }}">
+                                                        <input id="btn-input" type="text"
+                                                               class="form-control mesage_content"
+                                                               placeholder="Ecrire votre message...">
+                                                        <span class="input-group-btn">
+                                                                <a class="btn btn-primary" id="btn-chat"
+                                                                   title="Envoyer le message">
+                                                                    <i class="fa fa-send" style="color: #fff"></i>
+                                                                </a>
+                                                            </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% else %}
+                            <div class="alert alert-danger" role="alert">
+                                Vous devez connecter pour Contacter l'annonceur
+                                <a href="/security/logincustomer">Login</a>
+                                ou bien S'inscrire
+                                <a href="/profil">S'inscrire</a>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="widget">
+                        <h4 class="widget-title">Votre Avis</h4>
+                        <div class="widget">
+                            <h5 class="widget-title show-result">Moyenne : </h5>
+                        </div>
+                        <div class="agent-inner">
+                            <div class="agent-title">
+                                <div class="agent-details">
+                                    <div class="star-rating"><s><s><s><s><s></s></s></s></s></s>
+                                    </div>
+                                    <div>
+                                        <p class="show-result"></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                </aside>
+
+            </div>
+
+
+            <div class="col-lg-8 col-md-12 col-xs-12">
+                <div class="details-box vv">
+                    <div class="ads-details-info">
+                        <h5>Titre: </h5>
+                        <h6>{{ detail.libelle }} </h6>
+                        <h5>Description: </h5>
+                        <p class="mb-2"> {{ detail.description }} </p>
+                        <div class="details-meta">
+                            <span><a href="#"><i
+                                            class="fa fa-clock-o"></i> <b>Date d'ajoute : </b>  {{ detail.dateadd | date }}</a></span>
+                            <span><a href="#"><i class="fa fa-map-marker"></i> <b>Ville : </b> {{ detail.ville }} &nbsp;&nbsp;<b>Rue :</b>{{ detail.adresse }}</a></span> {# <span><a href="#"><i class="fa fa-eye"></i> 299 View</a></span> #}
+                        </div>
+                        <ul class="advertisement mb-4">
+                            <li>
+                                <h6><strong><i class="fa fa-folder"></i> {{ detail.subcategory.category.libelle }}
+                                    </strong>
+                                </h6>
+                            </li>
+                            <li>
+                                <h6><strong><i class="fa fa-cubes"></i> </strong>{{ detail.subcategory.titre }}</h6>
+                            </li>
+                        </ul>
+                    </div>
+                    {% if app.user != '' %}
+                    <section class="accordion-section clearfix mt-12" aria-label="Question Accordions">
+                        <div class="container-fluid">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading p-3 mb-3" role="tab" id="heading0">
+                                        <h5 class="panel-title">
+                                            <a class="collapsed add_comment" role="" title="" data-toggle="collapse"
+                                               data-parent="#accordion" href="#collapse0" aria-expanded="true"
+                                               aria-controls="collapse0">
+                                                <h5 class=""><i class="fa fa-plus"></i> Ajoute votre commentaire </h5>
+                                            </a>
+                                            <input type="hidden" class="annonceid" value="{{ detail.id }}">
+                                        </h5>
+                                    </div>
+                                    <div id="collapse0" class="panel-collapse collapse" role="tabpanel"
+                                         aria-labelledby="heading0">
+                                        <section class="testimonial section-padding">
+                                            <div class="container">
+
+                                                <div class="row all_comment">
+
+
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <hr>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group has-error">
+                                                                    <textarea class="form-control"
+                                                                              placeholder="Commentaire" id="comment_ann"
+                                                                              rows="3" data-error="Write your message"
+                                                                              required></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <button type="submit" id="submit" value="{{ detail.id }}"
+                                                                    class="btn btn-common comment_annonce"
+                                                                    style="pointer-events: all; cursor: pointer;">
+                                                                <font style="vertical-align: inherit;">
+                                                                    <font style="vertical-align: inherit;"><i
+                                                                                class="fa fa-comment-o"></i>
+                                                                        Commenter
+                                                                    </font>
+                                                                </font>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </section>
+                                        {% else %}
+                                            <div class="alert alert-danger" role="alert">
+                                                Vous devez connecter pour commenter annonce
+                                                <a href="/security/logincustomer">Login</a>
+                                                ou bien S'inscrire
+                                                <a href="/profil">S'inscrire</a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </section>
+
+
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
+    </div>
+
+
+{% endblock %}

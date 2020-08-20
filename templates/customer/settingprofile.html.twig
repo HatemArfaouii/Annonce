@@ -1,0 +1,189 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Modifier profil
+{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-wrapper">
+                        <h2 class="product-title">Modifier profil</h2>
+                        <ol class="breadcrumb">
+                            <li><a href="/">Home /</a></li>
+                            <li class="current">modifier profil</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_start(form,{attr: {class: 'smart-form login-form', id:'order-form' }}) }}
+    <div id="content" class="section-padding">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
+                    <aside>
+                        <div class="sidebar-box">
+                            <div class="user">
+                                <div class=" col-md-2 text-align-center">
+                                    <div class="circle text-align-center profile-img-container">
+                                        <img class="profile-pic" src="{{ asset('images/users/') }}{{ user.filename }}"
+                                             style=" width: 100%;height: 100%;"
+                                             class="img-thumbnail img-circle img-responsive"/>
+
+                                        <a href="#"><span class="fa fa-camera fa-2x upload-button"
+                                                          title="Image de profile"></span></a>
+                                    </div>
+                                    <div class="p-image">
+                                        {{ form_row(form.imageFile ,{'attr':{'class':'file-upload','accept':'image/*'} } ) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <nav class="navdashboard">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-dashboard"></i>
+                                            <span>Photo de profil</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div class="row page-content">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="inner-box">
+                                <div class="dashboard-box">
+                                    <h2 class="dashbord-title">Infos générale</h2>
+                                </div>
+                                <div class="dashboard-wrapper">
+                                    <div class="form-group mb-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Nom& Prénom*</label>
+                                            {{ form_row(form.fullName ,{'attr':{'placeholder':'Nom & prénom','class':'form-control'} } ) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Username *</label>
+                                            {{ form_row(form.username ,{'attr':{'placeholder':'Username','class':'form-control'} } ) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Password *</label>
+                                            {{ form_row(form.password.first, {'attr':{'placeholder':"Password",'class':'form-control'} }) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Repeat Password *</label>
+                                            {{ form_row(form.password.second, {'attr':{'placeholder':"Repeat Password",'class':'form-control'} }) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                            <div class="inner-box">
+                                <div class="tg-contactdetail">
+                                    <div class="dashboard-box">
+                                        <h2 class="dashbord-title">Infos Contact</h2>
+                                    </div>
+                                    <div class="dashboard-wrapper">
+                                        <div class="form-group mb-3">
+                                            <div class="form-group">
+                                                <label class="control-label">E-mail*</label>
+                                                {{ form_row(form.email,{'attr':{'placeholder':'email','class':'form-control'} }) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Addresse</label>
+                                                {{ form_row(form.addresse ,{'attr':{'placeholder':'Adresse','class':'form-control'} } ) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Téléphone mobile</label>
+                                                {{ form_row(form.telmobile ,{'attr':{'placeholder':'Téléphone mobile','class':'form-control'} } ) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Téléphone fixe</label>
+                                                {{ form_row(form.telfixe ,{'attr':{'placeholder':'Téléphone fixe','class':'form-control'} } ) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Code postal</label>
+                                                {{ form_row(form.codepost ,{'attr':{'placeholder':'Code postale','class':'form-control'} } ) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12  text-center">
+                    <button type="reset" class="btn btn-common disabled log-btn " onclick="this.form.reset();">RESET
+                    </button>
+
+                    <a class="btn btn-common log-btn" data-target="#modal_valid_account" data-toggle="modal"
+                       style="color: #fff;">SAUVEGARDER</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal_valid_account"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: whitesmoke;">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <i class="fa fa-lg fa-check-circle" style="color:#89AD45"></i>
+                        Validé modification du profil </h5>
+                    <button class="close " data-dismiss="modal" style="color: red;" type="button">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding" style="text-align: center;">
+                        <fieldset>
+                            <h5>
+                                Cliquer sur #valider pour modifier profil.
+                            </h5>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color: whitesmoke;">
+                    <div class="col-lg-12  text-center">
+                        <button type="reset" class="btn btn-common disabled log-btn"  data-dismiss="modal">Annuler</button>
+
+                        <button class="btn btn-common log-btn">Valider</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{ form_end(form) }}
+
+{% endblock %}

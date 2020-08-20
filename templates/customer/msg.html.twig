@@ -1,0 +1,176 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}message
+{% endblock %}
+
+{% block body %}
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-wrapper">
+                        <h2 class="product-title"><i class="fa fa-list"></i> Mes annonces</h2>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home /</a></li>
+                            <li class="current"> Mes annonces</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="content" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
+                    <aside>
+                        <div class="sidebar-box">
+                            <div class="user">
+                                <figure>
+                                    {% if app.user.filename != '' %}
+                                        <a href="#"><img src="{{ asset('images/users/') }}{{ app.user.filename }}"
+                                                         alt="" id="pp"></a>
+                                        <div class="usercontent">
+                                            <h3>{{ app.user.fullname }}</h3>
+                                        </div>
+                                    {% else %}
+                                        <a href="#"><img src="{{ asset('img/avatars/male.png') }}" alt=""></a>
+                                    {% endif %}
+                                </figure>
+                            </div>
+                            <nav class="navdashboard">
+                                <ul>
+                                    <li>
+                                        <a href="/front/customer/customerprofil">
+                                            <i class="fa fa-list"></i>
+                                            <span>Mes annonces</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('customer_settingprofile', {'id': app.user.id}) }}">
+                                            <i class="fa fa-cog"></i>
+                                            <span>Modifier profil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/front/customer/posteannonce">
+                                            <i class="fa fa-plus-circle"></i>
+                                            <span>Ajoute annonce</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout">
+                                            <i class="fa fa-lock"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div class="page-content">
+                        <div class="inner-box">
+                            <div class="dashboard-box">
+                                <h2 class="dashbord-title"><i class="fa fa-reply"></i> Message</h2>
+                            </div>
+
+                            <div id="comments">
+                                <div class="comment-box">
+                                    <ol class="comments-list">
+                                        <li>
+                                            {% for msg in msgs %}
+                                                {% if app.user.id == msg.id %}
+                                                    <div class="media">
+                                                        <div class="thumb-left">
+                                                            <a href="#">
+                                                                <img class="img-fluid" style="width: 60%; height: 60%"
+                                                                     src="{{ asset('images/users/') }}{{ msg.userid.filename }}"
+                                                                     alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="info-body">
+                                                            <div class="media-heading">
+                                                                <h4 class="name">{{ msg.userid.fullname }}</h4>
+                                                                <span class="comment-date"><i
+                                                                            class="lni-alarm-clock"></i> {{ msg.dateadd|date("m/d/Y") }}</span>
+                                                            </div>
+                                                            <p>{{ msg.content }}</p>
+                                                        </div>
+                                                    </div>
+                                                {% else %}
+                                                    <ul>
+                                                        <li>
+                                                            <div class="media">
+                                                                <div class="thumb-left">
+                                                                    <a href="#">
+                                                                        <img class="img-fluid"
+                                                                             style="width: 100px; height: 100px"
+                                                                             src="{{ asset('images/users/') }}{{ msg.userid.filename }}"
+                                                                             alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="info-body">
+                                                                    <div class="media-heading">
+                                                                        <h4 class="name">{{ msg.userid.fullname }}</h4>
+                                                                        <span class="comment-date"><i
+                                                                                    class="lni-alarm-clock"></i> June 21, 2020</span>
+                                                                    </div>
+                                                                    <p>{{ msg.content }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </li>
+                                    </ol>
+
+                                    <div id="respond">
+                                        <form method="post" action="/front/savemessage">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                                    <div class="form-group">
+                                                        <input id="author" class="form-control" name="author"
+                                                               type="text" value="" size="30" placeholder="Your Name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-xs-12">
+                                                    <div class="form-group">
+                                                        <input  class="form-control" name="annonceid" type="hidden"
+                                                                value="{{ annonceid }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12col-xs-12">
+                                                    <div class="form-group">
+                                                        <textarea  class="form-control" name="content"
+                                                                   cols="45" rows="5"
+                                                                   placeholder="Massage..."></textarea>
+                                                    </div>
+                                                    <button type="submit" id="submit" class="btn btn-common"><i
+                                                                class="fa fa-send-o"></i> Send message
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

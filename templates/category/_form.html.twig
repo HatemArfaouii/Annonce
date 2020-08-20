@@ -1,0 +1,32 @@
+{{ form_start(form,{attr: {class: 'smart-form client-form', id:'order-form' }}) }}
+<fieldset>
+    <section class="col col-4">
+        Libelle
+        <label class="input">
+            {{ form_row(form.libelle ,{'attr':{'placeholder':'Role name'} } ) }}
+        </label>
+    </section>
+    {# <section class="col col-4">image
+        <label class="input">
+            <i class=""></i>
+            {{ form_row(form.image ,{'attr':{'placeholder':'fa fa-plus'} }) }}
+            <b class="tooltip tooltip-bottom-right"></b>
+        </label>
+    </section> #}
+</fieldset>
+<footer>
+    <button class="btn btn-success"  type="submit">
+        <i class="fa fa-lg fa-upload"></i>
+        Update
+    </button>
+    <button class="btn bg-color-red txt-color-white" onclick="this.form.reset();" type="reset">
+        <i class="fa fa-remove"></i>
+        RESET
+    </button>
+</footer>
+<div class="message">
+    <i class="fa fa-check"></i>
+    <p>Thank you for your registration!
+    </p>
+</div>
+{{ form_end(form) }}

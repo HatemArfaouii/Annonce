@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Category{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="demo-btns pull-left">
+                <li>
+                    <h1><i class="fa fa-lg fa-edit"></i>&nbsp;&nbsp; Modifier catégorie</h1>
+                </li>
+                &nbsp;&nbsp;
+                <li>
+                    <a href="{{ path('category_index') }}" class="btn btn-primary btn-circle btn-sm" title="Retour liste"><i class="fa fa-lg fa-mail-reply"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% endblock %}

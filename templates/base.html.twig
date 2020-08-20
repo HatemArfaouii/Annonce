@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}Gestion d'annuaire
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/demo.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/toltip.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/invoice.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/lockscreen.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/smartadmin-production-plugins.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/smartadmin-production.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/your_style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/smartadmin-rtl.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/smartadmin-skins.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery-confirm.min.css') }}"/>
+
+    <link rel="stylesheet" href="{{ asset('css/summernote.css') }}"/>
+    <link
+            rel="stylesheet" href="{{ asset('css/gestra-reports/draganddrop.css') }}"/>
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}" type="image/x-icon">
+    <link
+            rel="icon" href="{{ asset('img/favicon/favicon.ico') }}" type="image/x-icon">
+    <!-- GOOGLE FONT -->
+    <link
+            rel="stylesheet"
+            href="{{ asset('http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700') }}">
+    <!-- Specifying a Webpage Icon for Web Clip
+                         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" href="{{ asset('img/splash/sptouch-icon-iphone.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/splash/touch-icon-ipad.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('img/splash/touch-icon-iphone-retina.png') }}">
+    <link
+            rel="apple-touch-icon" sizes="152x152" href="{{ asset('img/splash/touch-icon-ipad-retina.png') }}">
+
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta
+            content="black" name="apple-mobile-web-app-status-bar-style">
+
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="{{ asset('img/splash/ipad-landscape.png') }}"
+          media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="{{ asset('img/splash/ipad-portrait.png') }}"
+          media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="{{ asset('img/splash/iphone.png') }}"
+          media="screen and (max-device-width: 320px)">
+    <script src="{{ asset('js/plugin/flot/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery-2.1.1.min.js') }}"></script>
+    <script>
+        $(document).ready(function () { // START AND FINISH DATE
+            $('.clanderdate').datepicker({
+                dateFormat: 'dd.mm.yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                onSelect: function (selectedDate) {
+                    $('.clanderdate').datepicker('option', 'minDate', selectedDate);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body class="desktop-detected smart-style-1"> 
+    {% block header %}
+    <!-- HEADER -->
+    <header class="fixed-header" id="header">
+        <div
+                id="logo-group">
+            <!-- PLACE YOUR LOGO HERE -->
+            <span id="logo" style="color: #fff">
+                    Gestion d'annuaire
+                </span>
+            <span class="activity-dropdown" id="activity">
+                <a href="/user/annonceurs"> <i class="fa fa-user" style="color: #fff0f0"></i>
+                    <b class="badge">
+                        {{ count_annonceurs }}
+                    </b>
+                    </a>
+                </span>
+        </div>
+        <div class="pull-right">
+            <div class="btn-header pull-right" id="hide-menu">
+                    <span>
+                        <a data-action="toggleMenu" href="javascript:void(0);" title="Collapse Menu">
+                            <i class="fa fa-reorder"></i>
+                        </a>
+                    </span>
+            </div>
+            <ul class="header-dropdown-list hidden-xs padding-5" id="mobile-profile-img">
+                <li class="">
+                    <a class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown" href="#">
+                        <img src="{{ asset('img/avatars/sunny.png') }}" alt="John Doe" class="online"/>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a class="padding-10 padding-top-0 padding-bottom-0" href="javascript:void(0);">
+                                <i class="fa fa-cog"></i>
+                                Setting</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="padding-10 padding-top-0 padding-bottom-0" href="#">
+                                <i class="fa fa-user"></i>
+                                <u>P</u>rofile</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="padding-10 padding-top-0 padding-bottom-0" data-action="toggleShortcut"
+                               href="javascript:void(0);">
+                                <i class="fa fa-arrow-down"></i>
+                                <u>S</u>hortcut</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="padding-10 padding-top-0 padding-bottom-0" data-action="launchFullscreen"
+                               href="javascript:void(0);">
+                                <i class="fa fa-arrows-alt"></i>
+                                Full
+                                <u>S</u>creen</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout" href="#">
+                                <i class="fa fa-sign-out fa-lg"></i>
+                                <strong>
+                                    <u>L</u>ogout</strong>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- logout button -->
+            <div class="btn-header transparent pull-right" id="logout">
+                    <span>
+                        <a href="{{ asset('/logout') }}" title="Sign Out" data-action="userLogout"
+                           data-logout-msg="Vous pouvez améliorer votre sécurité après la déconnexion en fermant ce navigateur ouvert">
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </span>
+            </div>
+            <!-- end logout button -->
+
+            <!-- search mobile button (this is hidden till mobile view port) -->
+            <div class="btn-header transparent pull-right" id="search-mobile">
+                    <span>
+                        <a href="javascript:void(0)" title="Search">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </span>
+            </div>
+{#            <!-- end search mobile button -->#}
+
+{#            <!-- input: search field -->#}
+{#            <form action="#" class="header-search pull-right">#}
+{#                <input data-autocomplete='[#}
+{#                                                       "ActionScript",#}
+{#                                                       "AppleScript",#}
+{#                                                       "Asp",#}
+{#                                                       "BASIC",#}
+{#                                                       "C",#}
+{#                                                       "C++",#}
+{#                                                       "Clojure",#}
+{#                                                       "COBOL",#}
+{#                                                       "ColdFusion",#}
+{#                                                       "Erlang",#}
+{#                                                       "Fortran",#}
+{#                                                       "Groovy",#}
+{#                                                       "Haskell",#}
+{#                                                       "Java",#}
+{#                                                       "JavaScript",#}
+{#                                                       "Lisp",#}
+{#                                                       "Perl",#}
+{#                                                       "PHP",#}
+{#                                                       "Python",#}
+{#                                                       "Ruby",#}
+{#                                                       "Scala",#}
+{#                                                       "Scheme"]' id="search-fld" name="param"#}
+{#                       placeholder="Find reports and more" type="text">#}
+{#                <button type="submit">#}
+{#                    <i class="fa fa-search"></i>#}
+{#                </button>#}
+{#                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search">#}
+{#                    <i class="fa fa-times"></i>#}
+{#                </a>#}
+{#            </form>#}
+{#            <!-- end input: search field -->#}
+
+{#            <!-- fullscreen button -->#}
+            <div class="btn-header transparent pull-right" id="fullscreen">
+                    <span>
+                        <a data-action="launchFullscreen" href="javascript:void(0);" title="Full Screen">
+                            <i class="fa fa-arrows-alt"></i>
+                        </a>
+                    </span>
+            </div>
+
+        </div>
+    </header>
+
+{% endblock %}
+{% block asideleft %}
+    {% if app.user %}
+        <aside id="left-panel">
+            <div class="login-info">
+                    <span>
+                        <a data-action="toggleShortcut" href="javascript:void(0);" id="show-shortcut">
+                            {% if app.user.filename != '' %}
+                                <img src="{{ asset('images/users/') }}{{ app.user.filename }}" alt="me"
+                                     class=" online" style="width: 50px;height: 50px"/>
+                            {% else %}
+                                <img src="{{ asset('img/avatars/male.png') }}" alt="me" class="online"/>
+                            {% endif %}
+                            <span>
+                                {{ app.user.fullname }}
+                            </span>
+
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                    </span>
+            </div>
+            <br><br>
+            <nav style="font-size: smaller;">
+                <ul style="border-left: #00a300;">
+                    <li class="">
+                        <a href="{{ ('/admin') }}" title="Tableau de bord">
+                            <i class="fa fa-lg fa-fw fa-dashboard"></i>
+                            <span class="menu-item-parent">Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#">
+                            <i class="fa fa-users"><em>{{ count_users }}</em></i>
+                            <span class="menu-item-parent">
+                                    Gestion des utilisateurs
+                                </span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/user">
+                                    <i class="fa fa-user fa-2x"></i>
+                                    Liste admin</a>
+
+                            </li>
+                            <li class="">
+                                <a href="{{ path('user_annonceurs') }}">
+                                    <i class="fa fa-user"></i>
+                                    Liste annonceurs</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="/category">
+                            <i class="fa fa-tags"><em>{{ count_cat }}</em></i>
+                            <span class="menu-item-parent">
+                                    Gestion Categories
+                                </span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="/subcategory">
+                            <i class="fa fa-sitemap"><em>{{ count_sub_cat }}</em></i>
+                            <span class="menu-item-parent">
+                                    Gestion Sous-Categories
+                                </span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="/annonce">
+                            <i class="fa fa-lg fa-fw fa-bullhorn"><em>{{ count_annonces }}</em></i>
+                            <span class="menu-item-parent">Gestion  d'annonce</span>
+                        </a>
+                    </li>
+                    {# <li class="">
+                        <a href="#">
+                            <i class="fa fa-briefcase	"></i>
+                            <span class="menu-item-parent">Gestion  d'offres</span>
+                        </a>
+                    </li> #}
+
+                     <li class="">
+                        <a href="#" style="color : #b36f6f;">
+                            <i class="fa fa-cog"></i>
+                            <span class="menu-item-parent">
+                                    Configuration
+                                </span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/role">
+                                    <i class="fa fa-cog fa-2x"></i>
+                                    Gestion role</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <span class="minifyme" data-action="minifyMenu">
+                    <i class="fa fa-arrow-circle-left hit"></i>
+                </span>
+
+        </aside>
+        <!-- END NAVIGATION -->
+    {% endif %}
+{% endblock %}
+<!-- MAIN PANEL -->
+<div id="main" role="main">
+
+    <!-- MAIN CONTENT -->
+    <div id="content">
+        {% block body %}
+
+        {% endblock %}
+    </div>
+    <!-- END MAIN CONTENT -->
+
+</div>
+<!-- END MAIN PANEL -->
+{% block footer %}
+    <!-- PAGE FOOTER -->
+    <div class="page-footer">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                    <span class="txt-color-white">Gestion
+                        <span class="hidden-xs">
+                            - d'annuaire</span>
+                        © H-Arfaoui</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 text-right hidden-xs">
+                <div class="txt-color-white inline-block">
+                    <div class="btn-group dropup">
+
+                        <ul class="dropdown-menu pull-right text-left">
+                            <li>
+                                <div class="padding-5">
+                                    <p class="txt-color-darken font-sm no-margin">Download Progress</p>
+                                    <div class="progress progress-micro no-margin">
+                                        <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="padding-5">
+                                    <p class="txt-color-darken font-sm no-margin">Server Load</p>
+                                    <div class="progress progress-micro no-margin">
+                                        <div class="progress-bar progress-bar-success" style="width: 20%;"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="padding-5">
+                                    <p class="txt-color-darken font-sm no-margin">Memory Load
+                                        <span class="text-danger">*critical*</span>
+                                    </p>
+                                    <div class="progress progress-micro no-margin">
+                                        <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="padding-5">
+                                    <button class="btn btn-block btn-default">refresh</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE FOOTER -->
+
+{% endblock %}
+
+<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+Note: These tiles are completely responsive,you can add as many as you like -->
+<div id="shortcut">
+    <ul>
+        <li><a class="jarvismetro-tile big-cubes bg-color-blue" href="https://mail.google.com"><span class="iconbox"><i
+                            class="fa fa-envelope fa-4x"></i><span>Mail<span
+                                class="label pull-right bg-color-darken"> </span></span></span></a></li>
+        {# <li><a class="jarvismetro-tile big-cubes bg-color-orangeDark" href="#"><span class="iconbox"><i
+                            class="fa fa-calendar fa-4x"></i><span>Calendar</span></span></a></li> #}
+        {#<li><a class="jarvismetro-tile big-cubes bg-color-purple" href="#"><span class="iconbox"><i class="fa fa-map-marker fa-4x"></i><span>Maps</span></span></a></li>#}
+        {#<li><a class="jarvismetro-tile big-cubes bg-color-blueDark" href="#"><span class="iconbox"><i class="fa fa-book fa-4x"></i><span>Invoice<span class="label pull-right bg-color-darken">99</span></span></span></a></li>#}
+        {# <li><a class="jarvismetro-tile big-cubes bg-color-greenLight" href="#"><span class="iconbox"><i
+                            class="fa fa-picture-o fa-4x"></i><span>Gallery</span></span></a></li> #}
+        <li><a class="jarvismetro-tile big-cubes selected bg-color-pinkDark"
+               href="{{ path('user_edit', {'id': app.user.id}) }}"><span class="iconbox"><i
+                            class="fa fa-user fa-4x"></i><span> Profile</span></span></a></li>
+    </ul>
+</div>
+{#{% block javascript %}#}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/chart/chartt.js') }}"></script>
+
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="{{ asset('js/plugin/pace/pace.min.js') }}"></script>
+
+<script src="{{ asset('js/libs/jquery-ui-1.10.3.min.js') }}"></script>
+<!-- Notification -->
+<script src="{{ asset('js/notification/SmartNotification.min.js') }}"></script>
+<!-- smart-chat -->
+<script src="{{ asset('js/smart-chat-ui/smart.chat.manager.min.js') }}"></script>
+<script src="{{ asset('js/smart-chat-ui/smart.chat.ui.min.js') }}"></script>
+<!-- smartwidgets -->
+<script src="{{ asset('js/smartwidgets/jarvis.widget.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/jquery-validate/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/plugin/masked-input/jquery.maskedinput.min.js') }}"></script>
+{#            <script src="{{ asset('js/plugin/select2/select2.min.js') }}"></script>#}
+<!-- speech -->
+<!-- <script src="{{ asset('js/speech/voicecommand.min.js') }}"></script> -->
+<script src="{{ asset('js/plugin/jquery-touch/jquery.ui.touch-punch.min.js') }}"></script>
+<!-- config -->
+<script src="{{ asset('js/app.config.js') }}"></script>
+<script src="{{ asset('js/app.min.js') }}"></script>
+<script src="{{ asset('js/summernote.js') }}"></script>
+<script src="{{ asset('js/demo.min.js') }}"></script>
+<script src="{{ asset('js/jquery-confirm.min.js') }}"></script>
+<script src="{{ asset('js/plugin/dropzone/dropzone.min.js') }}"></script>
+
+<!-- Plugin -->
+
+<script src="{{ asset('js/manage/jquery.jeditable.min.js') }}"></script>
+<script src="{{ asset('js/manage/manage-user.js') }}"></script>
+<script src="{{ asset('js/manage/manage-category.js') }}"></script>
+<script src="{{ asset('js/manage/configuration.js') }}"></script>
+<script src="{{ asset('js/manage/subcategory.js') }}"></script>
+<script src="{{ asset('js/manage/manage-annonce.js') }}"></script>
+
+
+<script src="{{ asset('js/plugin/bootstrap-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+<script src="{{ asset('js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<script src="{{ asset('js/plugin/bootstrap-slider/bootstrap-slider.min.js') }}"></script>
+<script src="{{ asset('js/plugin/datatable-responsive/datatables.responsive.min.js') }}"></script>
+{#<script src="{{ asset('js/plugin/datatables/dataTables.bootstrap.min.js') }}"></script>#}
+{#            <script src="{{ asset('js/plugin/datatables/dataTables.colReorder.min.js') }}"></script>#}
+{#            <script src="{{ asset('js/plugin/datatables/dataTables.colVis.min.js') }}"></script>#}
+{#            <script src="{{ asset('js/plugin/datatables/dataTables.tableTools.min.js') }}"></script>#}
+<script src="{{ asset('js/plugin/datatables/jquery.dataTables.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/dygraphs/demo-data.min.js') }}"></script>
+<script src="{{ asset('js/plugin/dygraphs/dygraph-combined.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/bootstraptree/bootstrap-tree.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/bootstrapvalidator/bootstrapValidator.min.js') }}"></script>
+<script src="{{ asset('js/plugin/chartjs/chart.min.js') }}"></script>
+<script src="{{ asset('js/plugin/superbox/superbox.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/clockpicker/clockpicker.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/colorpicker/bootstrap-colorpicker.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/cssemotions/jquery.cssemoticons.min.js') }}"></script>
+
+{#<script src="{{ asset('js/plugin/dropzone/dropzone-amd-module.min.js') }}"></script>#}
+{#<script src="{{ asset('js/plugin/dropzone/dropzone.min.js') }}"></script>#}
+
+<script src="{{ asset('js/plugin/fastclick/fastclick.min.js') }}"></script>
+<script src="{{ asset('js/plugin/msie-fix/jquery.mb.browser.min.js') }}"></script>
+<script src="{{ asset('js/plugin/jquery-form/jquery-form.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/flot/jquery.colorhelpers.min.js') }}"></script>
+{#            <script src="{{ asset('js/plugin/flot/jquery.flot.canvas.min.js') }}"></script>#}
+{#            <script src="{{ asset('js/plugin/flot/jquery.flot.categories.min.js') }}"></script>#}
+{#            <script src="{{ asset('js/plugin/flot/jquery.flot.crosshair.min.js') }}"></script>#}
+<script src="{{ asset('js/plugin/flot/jquery.flot.cust.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.errorbars.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.fillbetween.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.image.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.navigate.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.orderBar.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.pie.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.resize.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.selection.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.stack.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.symbol.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.threshold.min.js') }}"></script>
+<script src="{{ asset('js/plugin/flot/jquery.flot.time.min.js') }}"></script>
+
+<script src="{{ asset('js/plugin/fuelux/wizard/wizard.min.js') }}"></script>
+
+<script type="text/javascript">
+
+
+    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+    $(document).ready(function () {
+        $("#true").hide();
+        $("#false").hide();
+
+        pageSetUp();
+
+        /* // DOM Position key index //
+
+                 l - Length changing (dropdown)
+                 f - Filtering input (search)
+                 t - The Table! (datatable)
+                 i - Information (records)
+                 p - Pagination (paging)
+                 r - pRocessing
+                 < and > - div elements
+                 <"#id" and > - div with an id
+                 <"class" and > - div with a class
+                 <"#id.class" and > - div with an id and class
+
+                 Also see: http://legacy.datatables.net/usage/features
+                 */
+
+        /* BASIC ;*/
+        var responsiveHelper_dt_basic = undefined;
+        var responsiveHelper_datatable_fixed_column = undefined;
+        var responsiveHelper_datatable_col_reorder = undefined;
+        var responsiveHelper_datatable_tabletools = undefined;
+
+        var breakpointDefinition = {
+            tablet: 1024,
+            phone: 480
+        };
+
+        $('#dt_basic').dataTable({
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" + "t" + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "autoWidth": true,
+            "preDrawCallback": function () { // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_dt_basic) {
+                    responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_dt_basic.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_dt_basic.respond();
+            }
+        });
+
+        /* END BASIC */
+
+        /* COLUMN FILTER  */
+        var otable = $('#datatable_fixed_column').DataTable({
+            // "bFilter": false,
+            // "bInfo": false,
+            // "bLengthChange": false
+            // "bAutoWidth": false,
+            // "bPaginate": false,
+            // "bStateSave": true // saves sort state using localStorage
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" + "t" + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "autoWidth": true,
+            "preDrawCallback": function () { // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_datatable_fixed_column) {
+                    responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_datatable_fixed_column.respond();
+            }
+
+        });
+
+        // custom toolbar
+        $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+
+        // Apply the filter
+        $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+
+            otable.column($(this).parent().index() + ':visible').search(this.value).draw();
+
+        });
+        /* END COLUMN FILTER */
+
+        /* COLUMN SHOW - HIDE */
+        $('#datatable_col_reorder').dataTable({
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" + "t" + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+            "autoWidth": true,
+            "preDrawCallback": function () { // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_datatable_col_reorder) {
+                    responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_datatable_col_reorder.respond();
+            }
+        });
+
+        /* END COLUMN SHOW - HIDE */
+
+        /* TABLETOOLS */
+        $('#datatable_tabletools').dataTable({
+
+            // Tabletools options:
+            // https://datatables.net/extensions/tabletools/button_options
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" + "t" + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+            "oTableTools": {
+                "aButtons": [
+                    "copy", "csv", "xls", {
+                        "sExtends": "pdf",
+                        "sTitle": "SmartAdmin_PDF",
+                        "sPdfMessage": "SmartAdmin PDF Export",
+                        "sPdfSize": "letter"
+                    }, {
+                        "sExtends": "print",
+                        "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                    }
+                ],
+                "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+            },
+            "autoWidth": true,
+            "preDrawCallback": function () { // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_datatable_tabletools) {
+                    responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_datatable_tabletools.respond();
+            }
+        });
+
+        /* END TABLETOOLS */
+
+    })
+
+</script>
+
+<script type="text/javascript">
+
+    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+    $(document).ready(function () {
+
+        pageSetUp();
+
+        var $checkoutForm = $('.smart-form').validate({ // Rules for form validation
+            rules: {
+                nom: {
+                    required: true
+                },
+                lname: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                phone: {
+                    required: true
+                },
+                country: {
+                    required: true
+                },
+                city: {
+                    required: true
+                },
+                code: {
+                    required: true,
+                    digits: true
+                },
+                address: {
+                    required: true
+                },
+                name: {
+                    required: true
+                },
+                card: {
+                    required: true,
+                    creditcard: true
+                },
+                cvv: {
+                    required: true,
+                    digits: true
+                },
+                month: {
+                    required: true
+                },
+                year: {
+                    required: true,
+                    digits: true
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                fname: {
+                    required: 'Please enter your first name'
+                },
+                lname: {
+                    required: 'Please enter your last name'
+                },
+                email: {
+                    required: 'Please enter your email address',
+                    email: 'Please enter a VALID email address'
+                },
+                phone: {
+                    required: 'Please enter your phone number'
+                },
+                country: {
+                    required: 'Please select your country'
+                },
+                city: {
+                    required: 'Please enter your city'
+                },
+                code: {
+                    required: 'Please enter code',
+                    digits: 'Digits only please'
+                },
+                address: {
+                    required: 'Please enter your full address'
+                },
+                name: {
+                    required: 'Please enter name on your card'
+                },
+                card: {
+                    required: 'Please enter your card number'
+                },
+                cvv: {
+                    required: 'Enter CVV2',
+                    digits: 'Digits only'
+                },
+                month: {
+                    required: 'Select month'
+                },
+                year: {
+                    required: 'Enter year',
+                    digits: 'Digits only please'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        var $registerForm = $(".smart-form").validate({ // Rules for form validation
+            rules: {
+                username: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20
+                },
+                passwordConfirm: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20,
+                    equalTo: '#password'
+                },
+                firstname: {
+                    required: true
+                },
+                lastname: {
+                    required: true
+                },
+                gender: {
+                    required: true
+                },
+                terms: {
+                    required: true
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                login: {
+                    required: 'Please enter your login'
+                },
+                email: {
+                    required: 'Please enter your email address',
+                    email: 'Please enter a VALID email address'
+                },
+                password: {
+                    required: 'Please enter your password'
+                },
+                passwordConfirm: {
+                    required: 'Please enter your password one more time',
+                    equalTo: 'Please enter the same password as above'
+                },
+                firstname: {
+                    required: 'Please select your first name'
+                },
+                lastname: {
+                    required: 'Please select your last name'
+                },
+                gender: {
+                    required: 'Please select your gender'
+                },
+                terms: {
+                    required: 'You must agree with Terms and Conditions'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        var $reviewForm = $("#review-form").validate({ // Rules for form validation
+            rules: {
+                name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                review: {
+                    required: true,
+                    minlength: 20
+                },
+                quality: {
+                    required: true
+                },
+                reliability: {
+                    required: true
+                },
+                overall: {
+                    required: true
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                name: {
+                    required: 'Please enter your name'
+                },
+                email: {
+                    required: 'Please enter your email address',
+                    email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
+                },
+                review: {
+                    required: 'Please enter your review'
+                },
+                quality: {
+                    required: 'Please rate quality of the product'
+                },
+                reliability: {
+                    required: 'Please rate reliability of the product'
+                },
+                overall: {
+                    required: 'Please rate the product'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        var $commentForm = $("#comment-form").validate({ // Rules for form validation
+            rules: {
+                name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                url: {
+                    url: true
+                },
+                comment: {
+                    required: true
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                name: {
+                    required: 'Enter your name'
+                },
+                email: {
+                    required: 'Enter your email address',
+                    email: 'Enter a VALID email'
+                },
+                url: {
+                    email: 'Enter a VALID url'
+                },
+                comment: {
+                    required: 'Please enter your comment'
+                }
+            },
+
+            // Ajax form submition
+            submitHandler: function (form) {
+                $(form).ajaxSubmit({
+                    success: function () {
+                        $("#comment-form").addClass('submited');
+                    }
+                });
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        var $contactForm = $("#contact-form").validate({ // Rules for form validation
+            rules: {
+                name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                message: {
+                    required: true,
+                    minlength: 10
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                name: {
+                    required: 'Please enter your name'
+                },
+                email: {
+                    required: 'Please enter your email address',
+                    email: 'Please enter a VALID email address'
+                },
+                message: {
+                    required: 'Please enter your message'
+                }
+            },
+
+            // Ajax form submition
+            submitHandler: function (form) {
+                $(form).ajaxSubmit({
+                    success: function () {
+                        $("#contact-form").addClass('submited');
+                    }
+                });
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        var $loginForm = $("#login-form").validate({ // Rules for form validation
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                email: {
+                    required: 'Please enter your email address',
+                    email: 'Please enter a VALID email address'
+                },
+                password: {
+                    required: 'Please enter your password'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        var $orderForm = $("#order-form").validate({ // Rules for form validation
+            rules: {
+                name: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                phone: {
+                    required: true
+                },
+                interested: {
+                    required: true
+                },
+                budget: {
+                    required: true
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                name: {
+                    required: 'Please enter your name'
+                },
+                email: {
+                    required: 'Please enter your email address',
+                    email: 'Please enter a VALID email address'
+                },
+                phone: {
+                    required: 'Please enter your phone number'
+                },
+                interested: {
+                    required: 'Please select interested service'
+                },
+                budget: {
+                    required: 'Please select your budget'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement: function (error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+        // START AND FINISH DATE
+        $('#startdate').datepicker({
+            dateFormat: 'dd.mm.yy',
+            prevText: '<i class="fa fa-chevron-left"></i>',
+            nextText: '<i class="fa fa-chevron-right"></i>',
+            onSelect: function (selectedDate) {
+                $('#finishdate').datepicker('option', 'minDate', selectedDate);
+            }
+        });
+
+        $('#finishdate').datepicker({
+            dateFormat: 'dd.mm.yy',
+            prevText: '<i class="fa fa-chevron-left"></i>',
+            nextText: '<i class="fa fa-chevron-right"></i>',
+            onSelect: function (selectedDate) {
+                $('#startdate').datepicker('option', 'maxDate', selectedDate);
+            }
+        });
+
+
+    })
+
+</script>
+
+<!-- Your GOOGLE ANALYTICS CODE Below -->
+{#<script type="text/javascript">#}
+    {#var _gaq = _gaq || [];#}
+    {#_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);#}
+    {#_gaq.push(['_trackPageview']);#}
+
+    {#(function () {#}
+        {#var ga = document.createElement('script');#}
+        {#ga.type = 'text/javascript';#}
+        {#ga.async = true;#}
+        {#ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';#}
+        {#var s = document.getElementsByTagName('script')[0];#}
+        {#s.parentNode.insertBefore(ga, s);#}
+    {#})();#}
+{#</script>#}
+
+
+<!-- Your GOOGLE ANALYTICS CODE Below -->
+{#<script type="text/javascript">#}
+    {#var _gaq = _gaq || [];#}
+    {#_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);#}
+    {#_gaq.push(['_trackPageview']);#}
+
+    {#(function () {#}
+        {#var ga = document.createElement('script');#}
+        {#ga.type = 'text/javascript';#}
+        {#ga.async = true;#}
+        {#ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';#}
+        {#var s = document.getElementsByTagName('script')[0];#}
+        {#s.parentNode.insertBefore(ga, s);#}
+    {#})();#}
+{#</script>#}
+{#<script>#}
+    {#if (!window.jQuery) {#}
+        {#document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');#}
+    {#}#}
+{#</script>#}
+{#<script>#}
+    {#if (!window.jQuery.ui) {#}
+        {#document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');#}
+    {#}#}
+{#</script>#}
+
+<!-- Your GOOGLE ANALYTICS CODE Below -->
+{#<script type="text/javascript">#}
+    {#var _gaq = _gaq || [];#}
+    {#_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);#}
+    {#_gaq.push(['_trackPageview']);#}
+
+    {#(function () {#}
+        {#var ga = document.createElement('script');#}
+        {#ga.type = 'text/javascript';#}
+        {#ga.async = true;#}
+        {#ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';#}
+        {#var s = document.getElementsByTagName('script')[0];#}
+        {#s.parentNode.insertBefore(ga, s);#}
+    {#})();#}
+{#</script>#}
+
+
+{#{% endblock %}#}
+</body>
+</html>
